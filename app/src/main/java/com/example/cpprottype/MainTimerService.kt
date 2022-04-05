@@ -2,7 +2,6 @@ package com.example.cpprottype
 
 import android.annotation.SuppressLint
 import android.os.CountDownTimer
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 

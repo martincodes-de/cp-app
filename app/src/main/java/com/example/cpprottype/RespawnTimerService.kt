@@ -8,7 +8,7 @@ import android.widget.Button
 class RespawnTimerService(buttonView: Button?, context: MainActivity) {
     private val buttonView: Button? = null
     private val context: MainActivity? = null
-    private val mediaPlayer = MediaPlayer.create(context, R.raw.respawn);
+    private val mediaPlayer = MediaPlayer.create(context, R.raw.respawn)
 
     private val countDownTimer = object : CountDownTimer(AppSettings.respawnCountDown.toLong(), 1000) {
         override fun onTick(millisUntilFinished: Long) {

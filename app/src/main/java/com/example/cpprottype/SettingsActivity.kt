@@ -20,7 +20,7 @@ class SettingsActivity : AppCompatActivity() {
         mainTimerField = findViewById(R.id.mainTimerField)
         respawnTimerField = findViewById(R.id.respawnTimerField)
 
-        nameField?.setText(AppSettings.checkPointName.toString())
+        nameField?.setText(AppSettings.checkPointName)
         mainTimerField?.setText(AppSettings.countDown.toString())
         respawnTimerField?.setText(AppSettings.respawnCountDown.toString())
     }
