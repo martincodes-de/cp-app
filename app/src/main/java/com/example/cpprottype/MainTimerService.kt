@@ -30,6 +30,10 @@ class MainTimerService(textView: TextView?, backgroundView: View?) {
         countDownTimer.cancel()
     }
 
+    fun setTeam(newTeam: String) {
+        team = newTeam
+    }
+
     private fun getBackgroundColor(team: String?): Int {
         return when (team) {
             "ROT" -> R.color.background_red
@@ -38,9 +42,5 @@ class MainTimerService(textView: TextView?, backgroundView: View?) {
                 R.color.teal_200
             }
         }
-    }
-
-    fun setTeam(newTeam: String) {
-        team = newTeam
     }
 }
