@@ -29,4 +29,8 @@ class RespawnTimerService(buttonView: Button?, context: MainActivity) {
     fun stopTimer() {
         countDownTimer.cancel()
     }
+
+    fun resetTimer() {
+        buttonView?.setText("RESPAWN")
+    }
 }
