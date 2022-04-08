@@ -2,7 +2,6 @@ package com.example.cpprottype
 
 import android.annotation.SuppressLint
 import android.os.CountDownTimer
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 
@@ -14,12 +13,14 @@ class MainTimerService(textView: TextView?, backgroundView: View?) {
     private val countDownTimer = object : CountDownTimer(AppSettings.countDown.toLong(), 1000) {
         override fun onTick(millisUntilFinished: Long) {
             textView?.setText(AppSettings.checkPointName + " - " + millisUntilFinished / 1000 + "s")
+            AppSettings.isRespawnTimerStartable = false
         }
 
         @SuppressLint("ResourceAsColor")
         override fun onFinish() {
             backgroundView?.setBackgroundResource(getBackgroundColor(team))
             textView?.setText(AppSettings.checkPointName)
+            AppSettings.isRespawnTimerStartable = true
         }
     }
 
@@ -29,6 +30,11 @@ class MainTimerService(textView: TextView?, backgroundView: View?) {
 
     fun stopTimer() {
         countDownTimer.cancel()
+        AppSettings.isRespawnTimerStartable = true
+    }
+
+    fun setTeam(newTeam: String) {
+        team = newTeam
     }
 
     private fun getBackgroundColor(team: String?): Int {
@@ -39,9 +45,5 @@ class MainTimerService(textView: TextView?, backgroundView: View?) {
                 R.color.teal_200
             }
         }
-    }
-
-    fun setTeam(newTeam: String) {
-        team = newTeam
     }
 }
