@@ -9,6 +9,8 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
     private var textView: TextView? = null
@@ -50,10 +52,22 @@ class MainActivity : AppCompatActivity() {
         val buttonView = buttonRawView as MaterialButton
 
         mainTimerService?.setTeam(buttonView.text.toString())
+
+        if (respawnTimerService?.isRunning() == true) {
+            respawnTimerService?.stopTimer()
+            respawnTimerService?.resetTimer()
+        }
+
         mainTimerService?.startTimer()
     }
 
     fun onRespawnBtnClick(buttonRawView: View) {
+        if (!AppSettings.isRespawnTimerStartable) {
+            return Snackbar.make(buttonRawView, "Respawntimer nicht gestartet wg. Einnahmeprozess",
+                BaseTransientBottomBar.LENGTH_LONG
+            ).show()
+        }
+
         respawnTimerService?.startTimer()
     }
 }

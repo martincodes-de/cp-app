@@ -10,15 +10,19 @@ class RespawnTimerService(buttonView: Button?, context: MainActivity) {
     private val context: MainActivity? = null
     private val mediaPlayer = MediaPlayer.create(context, R.raw.respawn)
 
+    private var isRunning: Boolean = false
+
     private val countDownTimer = object : CountDownTimer(AppSettings.respawnCountDown.toLong(), 1000) {
         override fun onTick(millisUntilFinished: Long) {
             buttonView?.setText("RESPAWN (" + millisUntilFinished / 1000 + "s)")
+            isRunning = true
         }
 
         @SuppressLint("ResourceAsColor")
         override fun onFinish() {
             buttonView?.setText("RESPAWN")
             mediaPlayer.start()
+            isRunning = false
         }
     }
 
@@ -28,9 +32,15 @@ class RespawnTimerService(buttonView: Button?, context: MainActivity) {
 
     fun stopTimer() {
         countDownTimer.cancel()
+        isRunning = false
     }
 
     fun resetTimer() {
         buttonView?.setText("RESPAWN")
+        isRunning = false
+    }
+
+    fun isRunning(): Boolean {
+        return isRunning
     }
 }
